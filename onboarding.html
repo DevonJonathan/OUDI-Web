@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OUDI - Onboarding</title>
+    <link rel="stylesheet" href="onboarding.css">
+</head>
+<body>
+    <div class="onboarding-container">
+        <!-- Step 1: Style Preference --><div class="onboarding-slide" id="slide1">
+            <div class="slide-content">
+                <div class="question-title">What is your style ?</div>
+                <div class="checkbox-group">
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="style" value="retro"> Retro
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="style" value="hiphop"> Hip Hop
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="style" value="minimalist"> Minimalist
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="style" value="floral"> Floral
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="style" value="y2k"> Y2K
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="style" value="coquette"> Coquette
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="style" value="athleisure"> Athleisure
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="style" value="pastels"> Pastels
+                    </label>
+                    <label class="checkbox-item other-option">
+                        <input type="checkbox" name="style" value="other" id="otherStyleCheckbox"> Other: 
+                        <input type="text" id="otherStyleInput" class="other-input" disabled>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Height Selection --><div class="onboarding-slide" id="slide2">
+            <div class="slide-content">
+                <div class="question-title">How tall are you?</div>
+                <div class="height-selection">
+                    <div class="ruler"></div>
+                    <div class="slider-wrapper">
+                        <input type="range" min="100" max="220" value="157" class="slider vertical-slider" id="heightSlider">
+                        <div class="slider-value" id="heightValue">157 cm</div>
+                    </div>
+                    <div class="person-icon"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Weight Selection --><div class="onboarding-slide" id="slide3">
+            <div class="slide-content">
+                <div class="question-title">How much do you weight?</div>
+                <div class="weight-selection">
+                    <div class="ruler"></div>
+                    <div class="slider-wrapper">
+                        <input type="range" min="30" max="150" value="50" class="slider vertical-slider" id="weightSlider">
+                        <div class="slider-value" id="weightValue">50 kg</div>
+                    </div>
+                    <div class="person-icon"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation and Progress --><div class="onboarding-navigation">
+            <button class="nav-button prev-button" id="prevButton" disabled>&larr;</button>
+            <span class="progress-indicator" id="progressIndicator">1/3</span>
+            <button class="nav-button next-button" id="nextButton">&rarr;</button>
+        </div>
+    </div>
+
+    <script src="onboarding.js"></script>
+</body>
+</html>

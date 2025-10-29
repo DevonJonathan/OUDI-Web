@@ -1,0 +1,324 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #F08080;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.onboarding-container {
+    background-color: transparent;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    min-height: 550px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.onboarding-slide {
+    width: 100%;
+    text-align: center;
+    display: none;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 10px;
+    transition: opacity 0.3s ease;
+}
+
+.onboarding-slide.active {
+    display: flex;
+}
+
+.slide-content {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 30px;
+}
+
+.question-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+/* --- Checkbox Group (Style Preference) --- */
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.checkbox-item {
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.checkbox-item input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid white;
+    border-radius: 4px;
+    margin-right: 10px;
+    position: relative;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.checkbox-item input[type="checkbox"]:checked {
+    background-color: white;
+    border-color: white;
+}
+
+.checkbox-item input[type="checkbox"]:checked::after {
+    content: '✔';
+    color: #F08080;
+    font-size: 14px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.other-option {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.other-input {
+    flex-grow: 1;
+    padding: 8px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+    margin-left: 10px;
+    font-size: 14px;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+    outline: none;
+}
+
+.other-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.other-input:focus {
+    border-color: white;
+}
+
+.other-input:disabled {
+    background-color: rgba(255, 255, 255, 0.1);
+    cursor: not-allowed;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* --- Height/Weight Selection Fixes --- */
+.height-selection, .weight-selection {
+    position: relative; 
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 300px;
+    width: 100%;
+    max-width: 300px;
+    padding-top: 20px;
+    /* FIX: Reduced padding-left to bring elements closer to the center */
+    padding-left: 30px; 
+    box-sizing: content-box;
+}
+
+.slider-wrapper {
+    position: absolute; 
+    height: 300px; 
+    /* FIX: Adjusted left to be closer to the center of the max-width container */
+    left: 30px; 
+    top: 20px;
+    width: 300px;
+    overflow: visible;
+}
+
+/* Vertical Slider */
+.vertical-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 300px;
+    height: 8px;
+    background: white; 
+    opacity: 1;
+    transition: opacity .2s;
+    border-radius: 5px;
+    border: 1px solid white;
+
+    transform: rotate(270deg) translateX(0);
+    transform-origin: 0 0;
+    position: absolute;
+    top: 300px; 
+    left: 0;
+}
+
+/* THUMB */
+.vertical-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: transparent;
+    border: 3px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.vertical-slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: transparent;
+    border: 3px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Slider Value Bubble */
+.slider-value {
+    position: absolute;
+    background-color: white; 
+    color: #F08080; 
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 14px;
+    white-space: nowrap;
+    z-index: 10;
+    /* FIX: Adjusted left to bring the bubble closer to the slider */
+    left: 60px; 
+    transform: translateY(-50%);
+}
+
+/* FIX: Triangle Pointer (using pseudo-element) */
+.slider-value::before {
+    content: '';
+    position: absolute;
+    /* Positioned on the left side of the bubble */
+    left: -15px; 
+    top: 50%;
+    transform: translateY(-50%);
+    
+    /* Creating the white triangle */
+    width: 0; 
+    height: 0; 
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 8px solid white;
+}
+
+/* Person Icon Fixes */
+.person-icon {
+    width: 60px;
+    height: 120px;
+    background-color: white; 
+    border-radius: 50% 50% 0 0;
+    position: absolute;
+    bottom: 20px; 
+    /* FIX: Adjusted left position to create more space between slider and person */
+    left: 170px; 
+    
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    z-index: 5;
+}
+
+.person-icon::before { /* Head */
+    content: '';
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 50px;
+    background-color: white; 
+    border-radius: 50%;
+}
+
+/* --- Navigation --- */
+.onboarding-navigation {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    padding: 0 10px;
+}
+
+.nav-button {
+    background-color: white; 
+    color: #F08080; 
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.nav-button:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.8); 
+}
+
+.nav-button:disabled {
+    background-color: rgba(255, 255, 255, 0.3); 
+    color: rgba(255, 255, 255, 0.6); 
+    cursor: not-allowed;
+}
+
+.progress-indicator {
+    font-size: 16px;
+    color: white; 
+    font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .onboarding-container {
+        padding: 20px 15px;
+        min-height: 500px;
+    }
+
+    .question-title {
+        font-size: 22px;
+        margin-bottom: 25px;
+    }
+
+    .checkbox-item, .other-input {
+        font-size: 15px;
+    }
+
+    .nav-button {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+}
+    
