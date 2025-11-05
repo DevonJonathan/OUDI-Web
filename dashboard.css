@@ -1,179 +1,283 @@
-body {
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
     font-family: 'Arial', sans-serif;
-    background-color: #F08080; 
-    display: flex;
-    justify-content: center; 
-    align-items: flex-start; 
-    min-height: 100vh;
+    background: #F5F5F5;
+    padding-bottom: 80px;
     overflow-x: hidden;
 }
 
-.dashboard-container {
-    background-color: white; 
-    width: 100%;
-    max-width: 450px; 
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    position: relative;
-    overflow-y: auto; 
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* --- Top Navigation Bar --- */
-.top-nav {
+/* Header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px; 
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    position: sticky;
-    top: 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     z-index: 100;
 }
 
-/* FIX: Ensure left section has the space needed */
-.left-section {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; 
-    width: 60px; 
-    height: 40px; 
+.profile-link,
+.friends-link {
+    cursor: pointer;
+    transition: opacity 0.3s;
+    text-decoration: none;
 }
 
+.profile-link:hover,
+.friends-link:hover {
+    opacity: 0.7;
+}
 
-/* --- Profile Picture Styling FIX (Final, Stable Version) --- */
-
-/* 1. Outer Ring Holder (The Pink Outline) */
-.nav-avatar-placeholder {
-    width: 50px; 
-    height: 50px;
+.header-profile {
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    
-    /* Create the thin pink ring using a slight overflow container */
-    border: 2px solid #F08080; 
-    padding: 2px; /* Inner padding creates the space for the light pink */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    /* Adjusted to align with the top-nav correctly */
-    margin-top: -5px; 
-    margin-left: -5px;
+    object-fit: cover;
+    cursor: pointer;
 }
 
-/* 2. Inner Fill (The Light Pink Placeholder) */
-.nav-avatar-placeholder img {
-    /* The actual image tag */
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    
-    /* Set the guaranteed light pink color */
-    background-color: #FFE8E8; 
-    
-    /* Ensure no artifact from image URL */
-    content: none; 
-}
-
-
-/* Clear out unused elements */
-.nav-avatar-icon {
-    display: none;
-}
-
-
-.logo {
-    font-size: 28px;
+.logo-text {
+    font-size: 24px;
     font-weight: bold;
     color: #F08080;
-    letter-spacing: 2px;
-    margin: 0;
+    letter-spacing: 4px;
 }
 
-.nav-icon {
+.icon-people {
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+/* Feed Container */
+.feed-container {
+    max-width: 650px;
+    margin: 80px auto 0;
+    padding: 0;
+    min-height: calc(100vh - 160px);
+}
+
+/* Post Card */
+.post-card {
+    background: white;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    width: 100%;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: #FFD4D4;
+}
+
+.post-profile {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 12px;
+}
+
+.post-user-info {
+    flex: 1;
+}
+
+.username {
+    font-size: 16px;
+    font-weight: bold;
+    color: #F08080;
+    margin-bottom: 2px;
+}
+
+.location {
+    font-size: 12px;
+    color: #F08080;
+    opacity: 0.7;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
     font-size: 24px;
     color: #F08080;
+    cursor: pointer;
+    padding: 0 10px;
 }
 
-/* --- Main Content Area --- */
-.main-content {
-    flex-grow: 1;
-    padding: 20px;
-    background-color: #f5f5f5; 
-    padding-bottom: 80px; 
+/* Post Image */
+.post-image {
+    width: 100%;
+    position: relative;
+    background: #f0f0f0;
 }
 
-/* Placeholder styling */
-.main-content p {
-    text-align: center;
-    color: #888;
-    margin-top: 50px;
+.post-image img {
+    width: 100%;
+    height: auto;
+    max-height: 70vh;
+    object-fit: cover;
     display: block;
 }
 
-/* --- Fixed Bottom Navigation Bar (FABs) --- */
-.bottom-nav {
-    position: fixed; 
-    bottom: 0;
-    left: 50%; 
-    transform: translateX(-50%); 
-    width: 100%;
-    max-width: 450px; 
-    background-color: white;
+/* Post Actions */
+.post-actions {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px 0;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
-    z-index: 1000;
+    gap: 15px;
+    padding: 15px;
 }
 
-.nav-fab {
-    background-color: transparent;
+.action-btn {
+    background: none;
     border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: transform 0.2s;
+}
+
+.action-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Post Caption */
+.post-caption {
+    padding: 0 15px 15px;
+}
+
+.post-caption p {
+    color: #333;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Rating Section */
+.rating-section {
+    padding: 15px;
+    border-top: 1px solid #FFE8E8;
+    text-align: center;
+}
+
+.stars {
     display: flex;
     justify-content: center;
-    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
 }
 
-.nav-fab:hover {
-    background-color: #ffe8e8;
+.star {
+    font-size: 32px;
+    color: #F08080;
+    cursor: pointer;
+    transition: transform 0.2s;
 }
 
-.fab-icon {
-    font-size: 24px;
+.star:hover {
+    transform: scale(1.2);
+}
+
+.star.filled {
     color: #F08080;
 }
 
-/* Active FAB button styling */
-.nav-fab.active {
-    background-color: #F08080;
+.rating-text {
+    color: #F08080;
+    font-size: 14px;
+    font-weight: 600;
 }
 
-.nav-fab.active .fab-icon {
-    color: white;
+/* Bottom Navigation */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px 0;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+    z-index: 100;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 450px) {
-    .dashboard-container {
-        max-width: none;
+.nav-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: transform 0.2s;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-btn:hover {
+    transform: scale(1.1);
+}
+
+.nav-btn.active svg {
+    fill: #F08080;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .feed-container {
+        max-width: 100%;
+        padding: 0;
     }
-    .bottom-nav {
-        max-width: none;
+
+    .post-card {
         border-radius: 0;
-        left: 0;
-        transform: translateX(0); 
+        margin-bottom: 0;
+    }
+
+    .logo-text {
+        font-size: 20px;
+        letter-spacing: 3px;
+    }
+
+    .post-image img {
+        max-height: 65vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 12px 15px;
+    }
+
+    .logo-text {
+        font-size: 18px;
+    }
+
+    .star {
+        font-size: 28px;
+    }
+
+    .post-image img {
+        max-height: 60vh;
+    }
+}
+
+/* Desktop/Laptop screens */
+@media (min-width: 1024px) {
+    .feed-container {
+        max-width: 600px;
+    }
+
+    .post-card {
+        margin-bottom: 20px;
     }
 }

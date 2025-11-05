@@ -7,75 +7,139 @@
     <link rel="stylesheet" href="onboarding.css">
 </head>
 <body>
-    <div class="onboarding-container">
-        <!-- Step 1: Style Preference --><div class="onboarding-slide" id="slide1">
-            <div class="slide-content">
-                <div class="question-title">What is your style ?</div>
-                <div class="checkbox-group">
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="style" value="retro"> Retro
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="style" value="hiphop"> Hip Hop
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="style" value="minimalist"> Minimalist
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="style" value="floral"> Floral
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="style" value="y2k"> Y2K
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="style" value="coquette"> Coquette
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="style" value="athleisure"> Athleisure
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" name="style" value="pastels"> Pastels
-                    </label>
-                    <label class="checkbox-item other-option">
-                        <input type="checkbox" name="style" value="other" id="otherStyleCheckbox"> Other: 
-                        <input type="text" id="otherStyleInput" class="other-input" disabled>
-                    </label>
-                </div>
+    <div class="onboard-container">
+        <!-- Screen 1: Style Selection -->
+        <div class="onboard-screen active" id="screen1">
+            <h2 class="question">What is your style ?</h2>
+            <div class="options-container">
+                <label class="checkbox-option">
+                    <input type="checkbox" name="style" value="Retro">
+                    <span class="checkbox-custom"></span>
+                    <span class="label-text">Retro</span>
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="style" value="Hip Hop">
+                    <span class="checkbox-custom"></span>
+                    <span class="label-text">Hip Hop</span>
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="style" value="Minimalist">
+                    <span class="checkbox-custom"></span>
+                    <span class="label-text">Minimalist</span>
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="style" value="Floral">
+                    <span class="checkbox-custom"></span>
+                    <span class="label-text">Floral</span>
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="style" value="Y2K">
+                    <span class="checkbox-custom"></span>
+                    <span class="label-text">Y2K</span>
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="style" value="Coquette">
+                    <span class="checkbox-custom"></span>
+                    <span class="label-text">Coquette</span>
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="style" value="Athleisure">
+                    <span class="checkbox-custom"></span>
+                    <span class="label-text">Athleisure</span>
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="style" value="Pastels">
+                    <span class="checkbox-custom"></span>
+                    <span class="label-text">Pastels</span>
+                </label>
+                <label class="checkbox-option other-option">
+                    <input type="checkbox" name="style" value="Other">
+                    <span class="checkbox-custom"></span>
+                    <span class="label-text">Other:</span>
+                    <input type="text" class="other-input" placeholder="">
+                </label>
+            </div>
+            <div class="navigation">
+                <button class="nav-arrow left" disabled>←</button>
+                <span class="page-indicator">1/4</span>
+                <button class="nav-arrow right" onclick="nextScreen()">→</button>
             </div>
         </div>
 
-        <!-- Step 2: Height Selection --><div class="onboarding-slide" id="slide2">
-            <div class="slide-content">
-                <div class="question-title">How tall are you?</div>
-                <div class="height-selection">
-                    <div class="ruler"></div>
-                    <div class="slider-wrapper">
-                        <input type="range" min="100" max="220" value="157" class="slider vertical-slider" id="heightSlider">
-                        <div class="slider-value" id="heightValue">157 cm</div>
+        <!-- Screen 2: Height Selection -->
+        <div class="onboard-screen" id="screen2">
+            <h2 class="question">How tall are you?</h2>
+            <div class="measurement-container">
+                <div class="measurement-bar">
+                    <div class="measurement-indicator" id="heightIndicator">
+                        <span class="measurement-value" id="heightValue">157 cm</span>
                     </div>
-                    <div class="person-icon"></div>
                 </div>
+                <svg class="person-icon" width="80" height="200" viewBox="0 0 80 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Head -->
+                    <circle cx="40" cy="30" r="25" fill="white"/>
+                    <!-- Body -->
+                    <rect x="22" y="60" width="36" height="70" rx="18" fill="white"/>
+                    <!-- Left Arm -->
+                    <rect x="10" y="65" width="12" height="50" rx="6" fill="white"/>
+                    <!-- Right Arm -->
+                    <rect x="58" y="65" width="12" height="50" rx="6" fill="white"/>
+                    <!-- Left Leg -->
+                    <rect x="25" y="130" width="14" height="65" rx="7" fill="white"/>
+                    <!-- Right Leg -->
+                    <rect x="41" y="130" width="14" height="65" rx="7" fill="white"/>
+                </svg>
+            </div>
+            <input type="range" id="heightSlider" min="140" max="200" value="157" class="slider">
+            <div class="navigation">
+                <button class="nav-arrow left" onclick="prevScreen()">←</button>
+                <span class="page-indicator">2/4</span>
+                <button class="nav-arrow right" onclick="nextScreen()">→</button>
             </div>
         </div>
 
-        <!-- Step 3: Weight Selection --><div class="onboarding-slide" id="slide3">
-            <div class="slide-content">
-                <div class="question-title">How much do you weight?</div>
-                <div class="weight-selection">
-                    <div class="ruler"></div>
-                    <div class="slider-wrapper">
-                        <input type="range" min="30" max="150" value="50" class="slider vertical-slider" id="weightSlider">
-                        <div class="slider-value" id="weightValue">50 kg</div>
+        <!-- Screen 3: Weight Selection -->
+        <div class="onboard-screen" id="screen3">
+            <h2 class="question">How much do you weight ?</h2>
+            <div class="measurement-container">
+                <div class="measurement-bar">
+                    <div class="measurement-indicator" id="weightIndicator">
+                        <span class="measurement-value" id="weightValue">50 kg</span>
                     </div>
-                    <div class="person-icon"></div>
                 </div>
+                <svg class="person-icon" width="80" height="200" viewBox="0 0 80 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Head -->
+                    <circle cx="40" cy="30" r="25" fill="white"/>
+                    <!-- Body -->
+                    <rect x="22" y="60" width="36" height="70" rx="18" fill="white"/>
+                    <!-- Left Arm -->
+                    <rect x="10" y="65" width="12" height="50" rx="6" fill="white"/>
+                    <!-- Right Arm -->
+                    <rect x="58" y="65" width="12" height="50" rx="6" fill="white"/>
+                    <!-- Left Leg -->
+                    <rect x="25" y="130" width="14" height="65" rx="7" fill="white"/>
+                    <!-- Right Leg -->
+                    <rect x="41" y="130" width="14" height="65" rx="7" fill="white"/>
+                </svg>
+            </div>
+            <input type="range" id="weightSlider" min="40" max="120" value="50" class="slider">
+            <div class="navigation">
+                <button class="nav-arrow left" onclick="prevScreen()">←</button>
+                <span class="page-indicator">3/4</span>
+                <button class="nav-arrow right" onclick="nextScreen()">→</button>
             </div>
         </div>
 
-        <!-- Navigation and Progress --><div class="onboarding-navigation">
-            <button class="nav-button prev-button" id="prevButton" disabled>&larr;</button>
-            <span class="progress-indicator" id="progressIndicator">1/3</span>
-            <button class="nav-button next-button" id="nextButton">&rarr;</button>
+        <!-- Screen 4: Completion -->
+        <div class="onboard-screen" id="screen4">
+            <h2 class="question">All set!</h2>
+            <p class="completion-text">Let's start your style journey</p>
+            <button class="complete-btn" onclick="completeOnboarding()">Get Started</button>
+            <div class="navigation">
+                <button class="nav-arrow left" onclick="prevScreen()">←</button>
+                <span class="page-indicator">4/4</span>
+                <button class="nav-arrow right" disabled>→</button>
+            </div>
         </div>
     </div>
 
