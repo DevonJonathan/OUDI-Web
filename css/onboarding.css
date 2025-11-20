@@ -182,6 +182,7 @@ body {
     outline: none;
     margin: 15px 0;
     -webkit-appearance: none;
+    appearance: none;
 }
 
 .slider::-webkit-slider-thumb {

@@ -1,4 +1,3 @@
-// Set up script to run after the document is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     const loginLink = document.querySelector('.login-link');
     const signupButton = document.querySelector('.signup-button');
@@ -8,22 +7,21 @@ document.addEventListener('DOMContentLoaded', function() {
             event.preventDefault();
 
             const originalHref = this.getAttribute('href');
-
             const newUrl = originalHref + '?skip_loading=true';
 
             window.location.href = newUrl;
         });
     }
 
-    // --- Sign up Button Functionality (with Validation) ---
     if (signupButton) {
-        signupButton.addEventListener('click', function() {
-            // Get all input values
+        signupButton.addEventListener('click', async function() {
+
             const email = document.querySelectorAll('.input-field')[0].value;
             const username = document.querySelectorAll('.input-field')[1].value;
             const password = document.querySelectorAll('.input-field')[2].value;
             const confirmPassword = document.querySelectorAll('.input-field')[3].value;
 
+            // Basic validation
             if (!email || !username || !password || !confirmPassword) {
                 alert('Validation Error: Please fill in all fields');
                 return;
@@ -39,9 +37,36 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            alert('Sign up successful! Email:', email, 'Username:', username);
-            
-            window.location.href = 'onboarding.html';
+            try {
+                // Send signup request to Express API
+                const response = await fetch("http://localhost:3000/signup", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        email,
+                        password,
+                        username   // <-- included but not stored yet
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    alert("Signup Failed: " + data.error);
+                    return;
+                }
+
+                alert("Signup successful! Welcome, " + username);
+
+                // Redirect after success
+                window.location.href = "onboarding.html";
+
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Network Error: Could not connect to server");
+            }
         });
     }
 });

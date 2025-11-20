@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OUDI</title>
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <script src="/framework/navbar.js" type="module"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <a href="/html/profile.html" class="profile-link">
+                <img src="/image.png" alt="Profile" class="header-profile">
+            </a>
+        </div>
+        <div class="header-center">
+            <h1 class="logo-text">OUDI</h1>
+        </div>
+        <div class="header-right">
+            <a href="/html/dashboard.html" class="friends-link">
+                <svg class="icon-people" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F08080" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Feed Container -->
+    <main class="feed-container">
+        <!-- Posts will be dynamically injected here -->
+    </main>
+
+    <bottom-nav active="dashboard"></bottom-nav>
+
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>

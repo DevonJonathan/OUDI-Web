@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OUDI - Challenge</title>
+    <link rel="stylesheet" href="/css/challenge.css">
+    <script src="/framework/navbar.js" type="module"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="challenge-header">
+        <button class="back-btn" onclick="window.location.href='dashboard.html'">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+        </button>
+        <h1 class="page-title">CHALLENGE</h1>
+        <div class="spacer"></div>
+    </header>
+
+    <!-- Wheel Screen -->
+    <main class="challenge-container" id="wheelScreen">
+        <!-- Timer -->
+        <div class="timer" id="timer">13:45:10</div>
+
+        <!-- Wheel Container -->
+        <div class="wheel-container">
+            <div class="wheel-pointer"></div>
+            <canvas id="wheelCanvas" width="400" height="400"></canvas>
+            <button class="spin-button" id="spinButton">SPIN</button>
+        </div>
+
+        <!-- Result Preview -->
+        <div class="result-preview" id="resultPreview" style="display: none;">
+            <h2 class="result-title">Theme of the day!</h2>
+            <div class="result-box">
+                <span id="resultTheme">Minimalist</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- Result Screen (shown after spinning) -->
+    <main class="result-container" id="resultScreen" style="display: none;">
+        <h2 class="result-main-title">Theme of the day!</h2>
+        <div class="result-main-box">
+            <span id="resultThemeMain">Minimalist</span>
+        </div>
+        <div class="timer-bottom" id="timerBottom">24:00:00</div>
+    </main>
+
+    <bottom-nav active="challenge"></bottom-nav>
+
+    <script src="/js/challenge.js"></script>
+</body>
+</html>

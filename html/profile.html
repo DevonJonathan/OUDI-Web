@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OUDI</title>
+    <link rel="stylesheet" href="/css/profile.css">
+    <script src="/framework/navbar.js" type="module"></script>
+</head>
+<body>
+<header class="profile-header">
+    <button class="back-btn" onclick="window.location.href='dashboard.html'">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F08080" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+    </button>
+
+    <h1 class="page-title">PROFILE</h1>
+
+    <div class="right-buttons">
+        <button class="settings-btn" onclick="window.location.href='onboarding.html'">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F08080" stroke-width="2">
+                <path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7z"/>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c0 .66.38 1.26 1 1.51H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+        </button>
+
+        <button class="logout-btn" onclick="handleLogout()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F08080" stroke-width="2">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+        </button>
+    </div>
+</header>
+
+
+    <!-- Profile Container -->
+    <main class="profile-container">
+        <!-- Profile Picture Section -->
+        <div class="profile-picture-section">
+            <div class="profile-picture-ring">
+                <img src="/image.png" alt="Profile" class="profile-picture">
+            </div>
+            <h2 class="username">Daniel The Batman</h2>
+            <p class="user-stats">157 cm • 50 kg</p>
+        </div>
+
+        <!-- Pins Section -->
+        <section class="pins-section">
+            <h3 class="section-title">PINS</h3>
+            <div class="pins-grid">
+                <div class="pin-item"></div>
+                <div class="pin-item"></div>
+                <div class="pin-item"></div>
+            </div>
+        </section>
+
+        <!-- My Diary Section -->
+        <section class="diary-section">
+            <h3 class="section-title">MY DIARY</h3>
+            <div class="diary-container">
+                <p class="diary-subtitle">RECENTS</p>
+                <div class="diary-grid">
+                    <div class="diary-day"></div>
+                    <div class="diary-day"></div>
+                    <div class="diary-day"></div>
+                    <div class="diary-day"></div>
+                    <div class="diary-day"></div>
+                    <div class="diary-day"></div>
+                    <div class="diary-day"></div>
+                    <div class="diary-day"></div>
+                    <div class="diary-day"></div>
+                    <div class="diary-day"></div>
+                    <div class="diary-day"></div>
+                    <div class="diary-day"></div>
+                    <div class="diary-day"></div>
+                    <div class="diary-day"></div>
+                </div>
+                <button class="view-diary-btn" onclick="alert('Diary view coming soon!')">VIEW MY DIARY</button>
+            </div>
+        </section>
+    </main>
+
+    <bottom-nav active=""></bottom-nav>
+
+    <script src="/js/profile.js"></script>
+</body>
+</html>

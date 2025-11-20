@@ -1,0 +1,7 @@
+node_modules/
+
+src/
+
+firebaseadmin.js
+
+serviceAccountKey.json

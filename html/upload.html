@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OUDI</title>
+
+  <link rel="stylesheet" href="/css/upload.css">
+  <script src="/framework/navbar.js" type="module"></script>
+</head>
+<body>
+  <!-- Header (unchanged visual) -->
+  <header class="upload-header">
+    <button class="back-btn" id="backBtn" aria-label="Back to dashboard">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F08080" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+    </button>
+    <div class="header-center">
+            <h1 class="logo-text">OUDI</h1>
+        </div>
+    <div class="spacer"></div>
+  </header>
+
+  <main class="upload-container">
+
+    <!-- BEFORE UPLOAD: simple upload call-to-action -->
+    <section id="state-upload" class="state active">
+      <div class="photo-preview" id="placeholderFrame">
+        <div class="upload-placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#F08080" stroke-width="2">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+            <circle cx="12" cy="13" r="4"></circle>
+          </svg>
+        </div>
+      </div>
+      <p class="step-label">PHOTO</p>
+
+      <input type="file" id="photoInput" accept="image/*" style="display:none" />
+      <button class="upload-btn" id="selectPhotoBtn" aria-label="Select photo">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="#F08080">
+          <circle cx="12" cy="12" r="10"></circle>
+        </svg>
+      </button>
+    </section>
+
+    <!-- AFTER UPLOAD: editor state (bio + location + 3 buttons) -->
+    <section id="state-editor" class="state" aria-hidden="true">
+      <!-- preview -->
+      <div class="photo-preview large" id="editorPreview">
+        <img id="editorImage" src="" alt="Uploaded preview" style="display:none">
+      </div>
+
+      <!-- bio + location small button on right -->
+      <div class="editor-row">
+        <input id="bioInput" class="form-input" type="text" placeholder="Write a caption..." aria-label="Caption" />
+        <button id="locationBtn" class="small-icon" title="Location settings" aria-label="Location">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F08080" stroke-width="2">
+            <path d="M12 21s8-5.686 8-10A8 8 0 1 0 4 11c0 4.314 8 10 8 10z"></path>
+            <circle cx="12" cy="11" r="2"></circle>
+          </svg>
+        </button>
+      </div>
+
+      <!-- small caption hint -->
+      <p class="hint">Add a short caption. Tap location to add or hide location.</p>
+
+      <!-- bottom 3 buttons -->
+      <div class="editor-actions">
+        <button id="cancelBtn" class="cancel-btn" aria-label="Cancel">✕</button>
+
+        <button id="postBtn" class="confirm-btn" aria-label="Post">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M9 12l2 2 4-4" stroke="#F08080" stroke-width="2" fill="none"/>
+          </svg>
+        </button>
+
+        <button id="linksBtn" class="delete-btn" aria-label="Shop links">
+          <!-- reuse delete-btn style to match shape (you can change icon) -->
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F08080" stroke-width="2">
+            <path d="M6 7h12l-1 13H7L6 7z"></path>
+            <path d="M9 7V5a3 3 0 0 1 6 0v2"></path>
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- LOCATION POPUP (modal-like bottom sheet) -->
+    <div id="locationModal" class="modal" aria-hidden="true">
+      <div class="modal-content">
+        <h3>Location</h3>
+        <label class="location-row">
+          <input type="checkbox" id="locToggle" checked />
+          <span>Share location</span>
+        </label>
+        <input id="locInput" class="form-input" type="text" placeholder="e.g., Surabaya, ID" style="display:none" />
+        <div class="modal-actions">
+          <button id="locCancel" class="btn btn-secondary">Cancel</button>
+          <button id="locSave" class="btn btn-primary">OK</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- LINKS POPUP -->
+    <div id="linksModal" class="modal" aria-hidden="true">
+      <div class="modal-content">
+        <h3>Add Shop Links</h3>
+        <input id="linkInput" class="form-input" type="url" placeholder="Put the link here..." />
+        <div id="linksList" class="links-list"></div>
+        <div class="modal-actions">
+          <button id="linksCancel" class="btn btn-secondary">Cancel</button>
+          <button id="linksAdd" class="btn btn-primary">Add</button>
+          <button id="linksDone" class="btn btn-primary">Done</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <bottom-nav active=""></bottom-nav>
+
+  <script src="/js/upload.js"></script>
+</body>
+</html>

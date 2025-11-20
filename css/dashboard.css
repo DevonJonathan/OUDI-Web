@@ -1,0 +1,285 @@
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+body { 
+    font-family: 'Arial', sans-serif; 
+    background: #F5F5F5; 
+    padding-bottom: 80px; 
+    overflow-x: hidden; 
+}
+
+/* Header */
+.header {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    right: 0;
+    background: white; 
+    padding: 15px 20px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+    z-index: 100;
+}
+
+.profile-link, 
+.friends-link { 
+    cursor: pointer; 
+    transition: opacity 0.3s; 
+    text-decoration: none; 
+}
+
+.profile-link:hover, 
+.friends-link:hover { 
+    opacity: 0.7; 
+}
+
+.header-profile { 
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+    cursor: pointer; 
+}
+
+.logo-text { 
+    font-size: 24px; 
+    font-weight: bold; 
+    color: #F08080; 
+    letter-spacing: 4px; 
+}
+
+.icon-people { 
+    cursor: pointer; 
+    transition: opacity 0.3s; 
+}
+
+/* Feed Container */
+.feed-container { 
+    max-width: 650px; 
+    margin: 80px auto 0; 
+    padding: 0; 
+    min-height: calc(100vh - 160px); 
+}
+
+/* Post Card */
+.post-card {
+    background: white; 
+    border-radius: 15px; 
+    margin-bottom: 15px; 
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+    width: 100%;
+}
+
+.post-header { 
+    display: flex; 
+    align-items: center; 
+    padding: 15px; 
+    background: #FFD4D4; 
+}
+
+.post-profile { 
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+    margin-right: 12px; 
+}
+
+.post-user-info { 
+    flex: 1; 
+}
+
+.username { 
+    font-size: 16px; 
+    font-weight: bold; 
+    color: #F08080; 
+    margin-bottom: 2px; 
+}
+
+.location { 
+    font-size: 12px; 
+    color: #F08080; 
+    opacity: 0.7; 
+}
+
+.menu-btn { 
+    background: none; 
+    border: none; 
+    font-size: 24px; 
+    color: #F08080; 
+    cursor: pointer; 
+    padding: 0 10px; 
+}
+
+/* Post Image */
+.post-image { 
+    width: 100%; 
+    position: relative; 
+    background: #f0f0f0; 
+    overflow: hidden; 
+}
+
+.post-image img { 
+    width: 100%; 
+    height: auto; 
+    max-height: 70vh; 
+    object-fit: contain; 
+    display: block; 
+}
+
+/* Theme label bottom-right */
+.theme-tag {
+    position: absolute; 
+    bottom: 10px; 
+    right: 10px;
+    background: rgba(240,128,128,0.85); 
+    color: #fff;
+    padding: 4px 8px; 
+    border-radius: 12px; 
+    font-size: 12px; 
+    font-weight: 600;
+    pointer-events: none;
+}
+
+/* Shopping bag button bottom-left */
+.shopping-btn {
+    position: absolute; 
+    bottom: 10px; 
+    left: 10px;
+    background: rgba(255,255,255,0.85);
+    color: #F08080;
+    width: 32px; 
+    height: 32px;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    border-radius: 50%; 
+    font-size: 18px; 
+    cursor: pointer; 
+    border: 1px solid #F08080;
+}
+
+/* Shopping popup (view-only links) */
+.shopping-popup {
+    position: absolute; 
+    bottom: 50px; 
+    left: 10px;
+    background: #fff; 
+    border: 1px solid #F08080; 
+    border-radius: 12px;
+    padding: 10px 14px; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 10; 
+    width: 220px; 
+    display: none; 
+    font-size: 13px; 
+    color: #333; 
+    word-break: break-word;
+}
+
+.shopping-popup.show { 
+    display: block; 
+}
+
+/* Post Actions */
+.post-actions { 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+    padding: 10px 15px; 
+}
+
+.like-btn { 
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+}
+
+.like-btn svg { 
+    transition: transform 0.2s, fill 0.2s; 
+}
+
+.like-btn.liked svg { 
+    transform: scale(1.2); 
+}
+
+.like-count { 
+    font-size: 14px; 
+    color: #333; 
+}
+
+/* Post Caption */
+.post-caption { 
+    padding: 0 15px 10px; 
+    font-size: 14px; 
+    color: #333; 
+}
+
+/* Rating Section */
+.rating-section { 
+    padding: 10px 15px; 
+    border-top: 1px solid #FFE8E8; 
+    text-align: center; 
+}
+
+.stars { 
+    display: flex; 
+    justify-content: center; 
+    gap: 10px; 
+    margin-bottom: 5px; 
+}
+
+.star { 
+    font-size: 28px; 
+    color: #F08080; 
+    cursor: pointer; 
+    transition: transform 0.2s; 
+}
+
+.star:hover { 
+    transform: scale(1.2); 
+}
+
+.star.filled { 
+    color: #F08080; 
+}
+
+/* Bottom Navigation */
+.bottom-nav { 
+    position: fixed; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    background: white; 
+    display: flex; 
+    justify-content: space-around; 
+    align-items: center; 
+    padding: 15px 0; 
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.1); 
+    z-index: 100; 
+}
+
+/* Responsive Design */
+@media(max-width: 480px) {
+    .post-card { 
+        border-radius: 0; 
+        margin-bottom: 0; 
+    }
+    .stars { 
+        gap: 5px; 
+    }
+    .star { 
+        font-size: 24px; 
+    }
+    .theme-tag, 
+    .shopping-btn { 
+        font-size: 10px; 
+        padding: 4px 6px; 
+    }
+}
