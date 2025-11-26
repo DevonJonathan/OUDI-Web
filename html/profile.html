@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OUDI</title>
-    <link rel="stylesheet" href="/css/profile.css">
-    <script src="/framework/navbar.js" type="module"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OUDI</title>
+  <link rel="stylesheet" href="/css/profile.css" />
+  <script src="/framework/navbar.js" type="module"></script>
 </head>
 <body>
 <header class="profile-header">
@@ -18,14 +18,14 @@
     <h1 class="page-title">PROFILE</h1>
 
     <div class="right-buttons">
-        <button class="settings-btn" onclick="window.location.href='onboarding.html'">
+        <button class="settings-btn" id="openSettingsBtn" title="Edit profile">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F08080" stroke-width="2">
                 <path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7z"/>
                 <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c0 .66.38 1.26 1 1.51H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
             </svg>
         </button>
 
-        <button class="logout-btn" onclick="handleLogout()">
+        <button class="logout-btn" onclick="handleLogout()" title="Logout">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F08080" stroke-width="2">
                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
                 <polyline points="16 17 21 12 16 7"></polyline>
@@ -35,56 +35,92 @@
     </div>
 </header>
 
+<main class="profile-container">
+  <div class="profile-picture-section">
+    <div class="profile-picture-ring">
+      <img id="profileImage" src="/image.png" alt="Profile" class="profile-picture">
+    </div>
 
-    <!-- Profile Container -->
-    <main class="profile-container">
-        <!-- Profile Picture Section -->
-        <div class="profile-picture-section">
-            <div class="profile-picture-ring">
-                <img src="/image.png" alt="Profile" class="profile-picture">
-            </div>
-            <h2 class="username">Daniel The Batman</h2>
-            <p class="user-stats">157 cm • 50 kg</p>
+    <div style="margin-bottom:12px;">
+      <input id="avatarFile" type="file" accept="image/*" style="display:inline-block;" />
+      <button id="uploadBtn" class="view-diary-btn" style="width:auto;padding:8px 12px;margin-left:8px;">Upload</button>
+    </div>
+
+    <h2 class="username">—</h2>
+    <p class="user-stats">—</p>
+    <p class="user-bio">—</p>
+  </div>
+
+  <section class="pins-section">
+    <h3 class="section-title">PINS</h3>
+    <div class="pins-grid">
+      <div class="pin-item"></div>
+      <div class="pin-item"></div>
+      <div class="pin-item"></div>
+    </div>
+  </section>
+
+  <section class="diary-section">
+    <h3 class="section-title">MY DIARY</h3>
+    <div class="diary-container">
+      <p class="diary-subtitle">RECENTS</p>
+      <div class="diary-grid">
+        <div class="diary-day"></div> 
+        <div class="diary-day"></div>
+        <div class="diary-day"></div>
+        <div class="diary-day"></div>
+        <div class="diary-day"></div>
+        <div class="diary-day"></div>
+        <div class="diary-day"></div>
+        <div class="diary-day"></div>
+        <div class="diary-day"></div>
+        <div class="diary-day"></div>
+        <div class="diary-day"></div>
+        <div class="diary-day"></div>
+        <div class="diary-day"></div>
+        <div class="diary-day"></div>
+      </div>
+      <button class="view-diary-btn" onclick="alert('Diary view coming soon!')">VIEW MY DIARY</button>
+    </div>
+  </section>
+</main>
+
+<div id="settingsModal" class="modal" aria-hidden="true">
+  <div class="modal-backdrop" id="modalBackdrop"></div>
+  <div class="modal-panel" role="dialog" aria-modal="true">
+    <header class="modal-header">
+      <h2>Edit profile</h2>
+      <button id="closeSettingsBtn" class="modal-close" title="Close">✕</button>
+    </header>
+
+    <div class="modal-body">
+      <label class="modal-label">Username</label>
+      <input id="usernameInput" type="text" placeholder="username" class="modal-input" />
+
+      <label class="modal-label">Bio</label>
+      <input id="bioInput" type="text" placeholder="bio" class="modal-input" />
+
+      <div style="display:flex;gap:8px;margin-top:8px;">
+        <div style="flex:1">
+          <label class="modal-label">Height (cm)</label>
+          <input id="heightInput" type="number" placeholder="height cm" class="modal-input" />
         </div>
+        <div style="flex:1">
+          <label class="modal-label">Weight (kg)</label>
+          <input id="weightInput" type="number" placeholder="weight kg" class="modal-input" />
+        </div>
+      </div>
 
-        <!-- Pins Section -->
-        <section class="pins-section">
-            <h3 class="section-title">PINS</h3>
-            <div class="pins-grid">
-                <div class="pin-item"></div>
-                <div class="pin-item"></div>
-                <div class="pin-item"></div>
-            </div>
-        </section>
+      <div style="margin-top:14px;text-align:right;">
+        <button id="cancelSettingsBtn" class="view-diary-btn" style="width:auto;padding:8px 12px;margin-right:8px;">Cancel</button>
+        <button id="saveSettingsBtn" class="view-diary-btn" style="width:auto;padding:8px 12px;">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-        <!-- My Diary Section -->
-        <section class="diary-section">
-            <h3 class="section-title">MY DIARY</h3>
-            <div class="diary-container">
-                <p class="diary-subtitle">RECENTS</p>
-                <div class="diary-grid">
-                    <div class="diary-day"></div>
-                    <div class="diary-day"></div>
-                    <div class="diary-day"></div>
-                    <div class="diary-day"></div>
-                    <div class="diary-day"></div>
-                    <div class="diary-day"></div>
-                    <div class="diary-day"></div>
-                    <div class="diary-day"></div>
-                    <div class="diary-day"></div>
-                    <div class="diary-day"></div>
-                    <div class="diary-day"></div>
-                    <div class="diary-day"></div>
-                    <div class="diary-day"></div>
-                    <div class="diary-day"></div>
-                </div>
-                <button class="view-diary-btn" onclick="alert('Diary view coming soon!')">VIEW MY DIARY</button>
-            </div>
-        </section>
-    </main>
+<bottom-nav active=""></bottom-nav>
 
-    <bottom-nav active=""></bottom-nav>
-
-    <script src="/js/profile.js"></script>
+<script src="/js/profile.js"></script>
 </body>
 </html>

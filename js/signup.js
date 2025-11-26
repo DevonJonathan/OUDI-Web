@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             try {
-                // Send signup request to Express API
+                // ✅ Send signup request to Express API
                 const response = await fetch("http://localhost:3000/signup", {
                     method: "POST",
                     headers: {
@@ -47,20 +47,26 @@ document.addEventListener('DOMContentLoaded', function() {
                     body: JSON.stringify({
                         email,
                         password,
-                        username   // <-- included but not stored yet
+                        username
                     })
                 });
 
                 const data = await response.json();
 
-                if (!response.ok) {
+                if (!response.ok || !data.success) {
                     alert("Signup Failed: " + data.error);
                     return;
                 }
 
+                // ✅ STORE LOGIN STATE
+                localStorage.setItem("uid", data.uid);
+                if (data.token) {
+                    localStorage.setItem("token", data.token);
+                }
+
                 alert("Signup successful! Welcome, " + username);
 
-                // Redirect after success
+                // ✅ Redirect after storing uid
                 window.location.href = "onboarding.html";
 
             } catch (error) {

@@ -12,7 +12,6 @@ body {
     min-height: 100vh;
 }
 
-/* Header */
 .challenge-header {
     position: fixed;
     top: 0;
@@ -49,7 +48,6 @@ body {
     width: 44px;
 }
 
-/* Challenge Container (Wheel Screen) */
 .challenge-container {
     max-width: 600px;
     margin: 80px auto 0;
@@ -60,7 +58,6 @@ body {
     min-height: calc(100vh - 160px);
 }
 
-/* Timer */
 .timer {
     font-size: 32px;
     font-weight: bold;
@@ -69,7 +66,6 @@ body {
     letter-spacing: 2px;
 }
 
-/* Wheel Container */
 .wheel-container {
     position: relative;
     margin-bottom: 40px;
@@ -123,7 +119,6 @@ body {
     cursor: not-allowed;
 }
 
-/* Result Preview (under wheel) */
 .result-preview {
     text-align: center;
     width: 100%;
@@ -153,7 +148,6 @@ body {
     font-weight: bold;
 }
 
-/* Result Screen (Full Screen After Spin) */
 .result-container {
     max-width: 600px;
     margin: 0 auto;
@@ -198,7 +192,6 @@ body {
     letter-spacing: 2px;
 }
 
-/* Bottom Navigation */
 .bottom-nav {
     position: fixed;
     bottom: 0;
@@ -234,7 +227,6 @@ body {
     fill: #F08080;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .challenge-container,
     .result-container {

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OUDI</title>
+    <link rel="stylesheet" href="/css/friends.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <button class="back-btn" id="backBtn">
+                <span class="back-icon">‹</span>
+            </button>
+            <h1 class="title">MY FRIENDS</h1>
+        </header>
+
+
+
+        <div class="requests-section">
+            <div class="section-header">
+                <span class="friends-icon">📩</span>
+                <h2 class="section-title">Friend Requests</h2>
+            </div>
+            <div class="requests-list" id="requestsList"></div>
+        </div>
+
+        <div class="friends-section">
+            <div class="section-header">
+                <span class="friends-icon">👥</span>
+                <h2 class="section-title">My Friends (<span id="friendCount">0</span>)</h2>
+            </div>
+            <div class="friends-list" id="friendsList"></div>
+        </div>
+
+        <div class="suggestions-section">
+            <div class="section-header">
+                <span class="star-icon">✨</span>
+                <h2 class="section-title">Suggestions</h2>
+            </div>
+            <div class="suggestions-list" id="suggestionsList"></div>
+        </div>
+    </div>
+
+    <script src="/js/friends.js"></script>
+</body>
+</html>

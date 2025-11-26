@@ -11,7 +11,6 @@ body {
     overflow-x: hidden; 
 }
 
-/* Header */
 .header {
     position: fixed; 
     top: 0; 
@@ -58,7 +57,6 @@ body {
     transition: opacity 0.3s; 
 }
 
-/* Feed Container */
 .feed-container { 
     max-width: 650px; 
     margin: 80px auto 0; 
@@ -66,7 +64,6 @@ body {
     min-height: calc(100vh - 160px); 
 }
 
-/* Post Card */
 .post-card {
     background: white; 
     border-radius: 15px; 
@@ -117,12 +114,12 @@ body {
     padding: 0 10px; 
 }
 
-/* Post Image */
 .post-image { 
     width: 100%; 
     position: relative; 
     background: #f0f0f0; 
-    overflow: hidden; 
+    overflow: visible;
+    z-index: 1;
 }
 
 .post-image img { 
@@ -133,7 +130,6 @@ body {
     display: block; 
 }
 
-/* Theme label bottom-right */
 .theme-tag {
     position: absolute; 
     bottom: 10px; 
@@ -147,7 +143,6 @@ body {
     pointer-events: none;
 }
 
-/* Shopping bag button bottom-left */
 .shopping-btn {
     position: absolute; 
     bottom: 10px; 
@@ -165,7 +160,6 @@ body {
     border: 1px solid #F08080;
 }
 
-/* Shopping popup (view-only links) */
 .shopping-popup {
     position: absolute; 
     bottom: 50px; 
@@ -187,12 +181,17 @@ body {
     display: block; 
 }
 
-/* Post Actions */
 .post-actions { 
     display: flex; 
+    justify-content: space-between; 
     align-items: center; 
-    gap: 8px; 
     padding: 10px 15px; 
+}
+
+.left-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px; 
 }
 
 .like-btn { 
@@ -210,29 +209,35 @@ body {
 }
 
 .like-count { 
+    line-height: 1.2; 
     font-size: 14px; 
     color: #333; 
 }
 
-/* Post Caption */
 .post-caption { 
     padding: 0 15px 10px; 
     font-size: 14px; 
     color: #333; 
 }
 
-/* Rating Section */
 .rating-section { 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
     padding: 10px 15px; 
     border-top: 1px solid #FFE8E8; 
-    text-align: center; 
 }
 
 .stars { 
     display: flex; 
-    justify-content: center; 
     gap: 10px; 
     margin-bottom: 5px; 
+}
+
+.rating-text {
+    font-size: 14px;
+    color: #F08080;
+    text-align: center;
 }
 
 .star { 
@@ -250,7 +255,6 @@ body {
     color: #F08080; 
 }
 
-/* Bottom Navigation */
 .bottom-nav { 
     position: fixed; 
     bottom: 0; 
@@ -265,7 +269,6 @@ body {
     z-index: 100; 
 }
 
-/* Responsive Design */
 @media(max-width: 480px) {
     .post-card { 
         border-radius: 0; 

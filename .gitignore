@@ -5,3 +5,4 @@ src/
 firebaseadmin.js
 
 serviceAccountKey.json
+.vercel

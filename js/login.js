@@ -18,9 +18,6 @@ if (skipLoading) {
     }, 3500);
 }
 
-// =====================================
-// LOGIN FUNCTION (Connected to Express API)
-// =====================================
 document.addEventListener("DOMContentLoaded", function () {
     const loginButton = document.querySelector(".login-button");
 
@@ -35,7 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             try {
-                // Send login request to Express API
                 const response = await fetch("http://localhost:3000/login", {
                     method: "POST",
                     headers: {
@@ -46,13 +42,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 const data = await response.json();
 
-                if (!response.ok) {
+                if (!response.ok || !data.success) {
                     alert("Login Failed: " + data.error);
                     return;
                 }
 
-                // Save token for future authenticated requests
+                // Save token + UID for profile/dashboard
                 localStorage.setItem("authToken", data.token);
+                localStorage.setItem("uid", data.uid);
 
                 alert("Welcome, " + email);
                 window.location.href = "dashboard.html";
