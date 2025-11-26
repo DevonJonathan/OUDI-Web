@@ -127,7 +127,7 @@ async function removeFriend(friendId) {
 }
 
 document.getElementById("backBtn").addEventListener("click", () => {
-    window.history.back();
+    window.location.href = 'dashboard.html';
 });
 
 loadFriends();
