@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const uid = localStorage.getItem('uid');
   if (!uid) {
     console.warn('No uid in localStorage — redirecting to login.');
-    // do not forcibly redirect; show defaults. If you want redirect:
     window.location.href = 'login.html';
   } else {
     loadUserProfile(uid);

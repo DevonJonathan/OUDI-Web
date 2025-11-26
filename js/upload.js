@@ -43,6 +43,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const uid = localStorage.getItem("uid");
 
+      // find uid from localStorage
+    if (!uid) {
+      console.warn('No uid in localStorage — redirecting to login.');
+      window.location.href = 'login.html';
+    } else {
+      loadUserProfile(uid);
+    }
+
   const THEME_SUGGESTIONS = [
     "Retro", "Hip Hop", "Minimalist", "Floral", "Y2K",
     "Coquette", "Athleisure", "Pastels",

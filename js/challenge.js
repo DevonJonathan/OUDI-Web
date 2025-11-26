@@ -24,8 +24,15 @@ const ctx = wheelCanvas.getContext("2d");
 let spinning = false;
 let wheelAngle = 0;
 
-const uid = localStorage.getItem("uid"); // per-user lock
 
+
+const uid = localStorage.getItem("uid"); // per-user lock
+  if (!uid) {
+    console.warn('No uid in localStorage — redirecting to login.');
+    window.location.href = 'login.html';
+  } else {
+    loadUserProfile(uid);
+  }
 function drawWheel() {
     const numSlices = themes.length;
     const sliceAngle = (2 * Math.PI) / numSlices;

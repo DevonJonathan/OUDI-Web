@@ -2,16 +2,19 @@ let currentScreen = 1;
 const totalScreens = 4;
 
 document.addEventListener("DOMContentLoaded", function () {
+
     setupHeightSlider();
     setupWeightSlider();
 });
 
-const currentUserId = localStorage.getItem("uid");
-
-if (!currentUserId) {
-    alert("User not logged in!");
-    window.location.href = "login.html";
-}
+    // find uid from localStorage
+    const uid = localStorage.getItem('uid');
+        if (!uid) {
+    console.warn('No uid in localStorage — redirecting to login.');
+        window.location.href = 'login.html';
+    } else {
+        loadUserProfile(uid);
+    }
 
 function nextScreen() {
     if (currentScreen < totalScreens) {

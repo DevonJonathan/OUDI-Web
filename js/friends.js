@@ -15,6 +15,15 @@ function convertAvatar(url) {
     return "/image.png";
 }
 
+    // find uid from localStorage
+  const uid = localStorage.getItem('uid');
+  if (!uid) {
+    console.warn('No uid in localStorage — redirecting to login.');
+    window.location.href = 'login.html';
+  } else {
+    loadUserProfile(uid);
+  }
+
 async function loadFriends() {
     const resp = await fetch(`${API_BASE}/friends/${currentUserId}`);
     const data = await resp.json();

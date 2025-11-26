@@ -3,6 +3,15 @@ document.addEventListener("DOMContentLoaded", async function () {
   const currentUserId = localStorage.getItem("uid");
   const feedContainer = document.querySelector(".feed-container");
 
+    // find uid from localStorage
+  const uid = localStorage.getItem('uid');
+  if (!uid) {
+    console.warn('No uid in localStorage — redirecting to login.');
+    window.location.href = 'login.html';
+  } else {
+    loadUserProfile(uid);
+  }
+
   document.addEventListener("click", () => {
     document.querySelectorAll(".shopping-popup.show").forEach(p => p.classList.remove("show"));
   });
