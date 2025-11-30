@@ -6,3 +6,5 @@ firebaseadmin.js
 
 serviceAccountKey.json
 .vercel
+
+.firebase

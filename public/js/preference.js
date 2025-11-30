@@ -1,3 +1,5 @@
+const API_BASE = "https://oudi-web-devons-projects-8b9164ea.vercel.app";
+
 let currentScreen = 1;
 const totalScreens = 4;
 
@@ -6,15 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
     setupHeightSlider();
     setupWeightSlider();
 });
-
-    // find uid from localStorage
-    const uid = localStorage.getItem('uid');
-        if (!uid) {
-    console.warn('No uid in localStorage — redirecting to login.');
-        window.location.href = 'login.html';
-    } else {
-        loadUserProfile(uid);
-    }
 
 function nextScreen() {
     if (currentScreen < totalScreens) {
@@ -65,7 +58,7 @@ function setupWeightSlider() {
 }
 
 async function completeOnboarding() {
-
+    const currentUserId = localStorage.getItem('uid');
     const selectedStyles = [];
     const checkboxes = document.querySelectorAll('input[name="style"]:checked');
 
@@ -90,13 +83,13 @@ async function completeOnboarding() {
     };
 
     try {
-        const resp = await fetch("http://localhost:3000/onboarding", {
+            const response = await fetch(`${API_BASE}/onboarding`, {                    
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
         });
 
-        const data = await resp.json();
+        const data = await response.json();
 
         if (!data.success) {
             alert("Error saving preferences: " + data.error);
@@ -105,7 +98,7 @@ async function completeOnboarding() {
 
         localStorage.setItem("preferencesCompleted", "true");
 
-        window.location.href = "dashboard.html";
+        window.location.href = "/html/dashboard.html";
 
     } catch (error) {
         console.error("Network Error:", error);

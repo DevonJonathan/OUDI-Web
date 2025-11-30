@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:3000";
+const API_BASE = "https://oudi-web-devons-projects-8b9164ea.vercel.app";
 const currentUserId = localStorage.getItem("uid");
 
 const friendsListEl = document.getElementById("friendsList");
@@ -15,14 +15,6 @@ function convertAvatar(url) {
     return "/image.png";
 }
 
-    // find uid from localStorage
-  const uid = localStorage.getItem('uid');
-  if (!uid) {
-    console.warn('No uid in localStorage — redirecting to login.');
-    window.location.href = 'login.html';
-  } else {
-    loadUserProfile(uid);
-  }
 
 async function loadFriends() {
     const resp = await fetch(`${API_BASE}/friends/${currentUserId}`);
@@ -115,6 +107,7 @@ async function declineRequest(fromId) {
     loadRequests();
     loadSuggestions();
 }
+
 async function removeFriend(friendId) {
     await fetch(`${API_BASE}/friends/remove`, {
         method: "DELETE",
@@ -127,7 +120,7 @@ async function removeFriend(friendId) {
 }
 
 document.getElementById("backBtn").addEventListener("click", () => {
-    window.location.href = 'dashboard.html';
+    window.location.href = '/html/dashboard.html';
 });
 
 loadFriends();

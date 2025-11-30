@@ -1,3 +1,5 @@
+const API_BASE = "https://oudi-web-devons-projects-8b9164ea.vercel.app";
+
 document.addEventListener('DOMContentLoaded', function() {
     const loginLink = document.querySelector('.login-link');
     const signupButton = document.querySelector('.signup-button');
@@ -39,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             try {
                 // ✅ Send signup request to Express API
-                const response = await fetch("http://localhost:3000/signup", {
+                const response = await fetch(`${API_BASE}/signup`, {                    
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -58,7 +60,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     return;
                 }
 
-                // ✅ STORE LOGIN STATE
                 localStorage.setItem("uid", data.uid);
                 if (data.token) {
                     localStorage.setItem("token", data.token);
@@ -66,8 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 alert("Signup successful! Welcome, " + username);
 
-                // ✅ Redirect after storing uid
-                window.location.href = "onboarding.html";
+                window.location.href = "/html/preference.html";
 
             } catch (error) {
                 console.error("Error:", error);

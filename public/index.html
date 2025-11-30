@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OUDI</title>
+</head>
+<body>
+    <script>
+        const uid = localStorage.getItem('uid');
+        const token = localStorage.getItem('authToken');
+
+        if (uid && token) {
+            window.location.href = "/html/dashboard.html";
+        } else {
+            window.location.href = "/html/login.html";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,333 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: #fff;
+    color: #333;
+}
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #fff;
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Header and Nav Controls --- */
+
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+.back-icon {
+    font-size: 28px;
+    color: #ff9999;
+    font-weight: bold;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ff9999;
+    letter-spacing: 2px;
+}
+
+.nav-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.nav-btn {
+    background-color: #ffe6f0;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+    background-color: #ffcce0;
+    transform: scale(1.05);
+}
+
+.nav-btn:active {
+    transform: scale(0.95);
+}
+
+.nav-icon {
+    font-size: 28px;
+    color: #ff6b9d;
+    font-weight: bold;
+    line-height: 1;
+}
+
+/* --- Calendar Structure --- */
+
+.calendar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.month-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.month-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ff6b9d;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.weekday {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: #ff9999;
+    padding: 5px 0;
+}
+
+.days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+.day-cell {
+    aspect-ratio: 1;
+    border: 1.5px solid #ffe6f0;
+    border-radius: 8px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: #999;
+    /* ⭐️ Needed for the absolute positioning of the pink dot */
+    position: relative; 
+}
+
+.day-cell:hover {
+    border-color: #ffb3d1;
+    transform: scale(1.05);
+}
+
+.day-cell.has-post {
+    /* Keep existing styles */
+    background-color: #ffcce0;
+    border-color: #ff99bb;
+    color: #ff1a75;
+    font-weight: 600;
+}
+
+.day-cell.has-post:hover {
+    background-color: #ffb3d1;
+    border-color: #ff6b9d;
+}
+
+/* ⭐️ NEW: The distinct pink circle indicator */
+.day-cell.has-post::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 5px; /* Adjust position from the bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px; /* Size of the circle */
+    height: 6px;
+    border-radius: 50%;
+    background-color: #ff6b9d; /* Use a prominent pink color */
+    box-shadow: 0 0 4px rgba(255, 107, 157, 0.5); /* Subtle glow */
+}
+
+.day-cell.selected {
+    border: 2.5px solid #ff6b9d;
+    border-color: #ff6b9d;
+}
+
+.day-cell.empty {
+    border: none;
+    cursor: default;
+    background-color: transparent;
+}
+
+.day-cell.empty:hover {
+    transform: none;
+}
+
+/* --- Posts Display --- */
+
+.posts-display {
+    border-top: 2px solid #ffe6f0;
+    padding-top: 20px;
+    margin-top: auto;
+}
+
+.posts-header {
+    margin-bottom: 15px;
+}
+
+.posts-date {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ff6b9d;
+    letter-spacing: 0.5px;
+}
+
+.posts-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Increased gap slightly for better separation */
+}
+
+.post-item {
+    background-color: #fff5f9;
+    border-radius: 12px;
+    padding: 15px;
+    border: 1px solid #ffe6f0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* ⭐️ NEW: Post Header for Theme and Rating */
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ffe6f0;
+}
+
+.post-theme {
+    font-size: 16px;
+    font-weight: 700;
+    color: #ff6b9d;
+    margin: 0;
+}
+
+.post-rating {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ff9999;
+}
+
+.post-image {
+    width: 100%;
+    max-height: 250px; /* Constrain image size */
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.post-text {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+/* ⭐️ NEW: Post Footer for Link, Likes, and Time */
+.post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    padding-top: 5px;
+    border-top: 1px dashed #ffcce0;
+}
+
+.post-link {
+    color: #ff6b9d;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.post-link:hover {
+    color: #ff1a75;
+}
+
+.post-likes {
+    color: #ff6b9d;
+    font-weight: 600;
+}
+
+.post-time {
+    color: #999;
+    font-weight: 500;
+}
+
+.no-posts {
+    font-size: 14px;
+    color: #999;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Loading/Error Messages */
+.loading-message, .error-message {
+    text-align: center;
+    color: #ff9999;
+    padding: 20px 0;
+    font-style: italic;
+}
+
+.pin-action-btn {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.pin-action-btn.unpinned {
+    background-color: #F08080; /* Light Coral/Pink for Pin */
+    color: white;
+}
+
+.pin-action-btn.pinned {
+    background-color: #fff; /* White/Subtle for Unpin */
+    border: 1px solid #F08080;
+    color: #F08080;
+}

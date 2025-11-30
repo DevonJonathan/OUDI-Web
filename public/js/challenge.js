@@ -1,12 +1,10 @@
 const themes = [
-    "Minimalist",
-    "Vintage",
-    "Streetwear",
-    "Boho",
-    "Indie",
-    "Sporty",
-    "Floral",
-    "Casual"
+    "Retro", "Hip Hop", "Minimalist", "Floral", "Y2K",
+    "Coquette", "Athleisure", "Pastels",
+    "Korean", "Korean Minimal", "Streetwear", "Soft Girl", "Grunge",
+    "Vintage", "Indie", "E-girl", "Dark Academia", "Light Academia",
+    "Techwear", "Cottagecore", "Harajuku", "Sporty", "Denim",
+    "Classic", "Monochrome", "Aesthetic Casual"
 ];
 
 const wheelCanvas = document.getElementById("wheelCanvas");
@@ -27,12 +25,7 @@ let wheelAngle = 0;
 
 
 const uid = localStorage.getItem("uid"); // per-user lock
-  if (!uid) {
-    console.warn('No uid in localStorage — redirecting to login.');
-    window.location.href = 'login.html';
-  } else {
-    loadUserProfile(uid);
-  }
+
 function drawWheel() {
     const numSlices = themes.length;
     const sliceAngle = (2 * Math.PI) / numSlices;

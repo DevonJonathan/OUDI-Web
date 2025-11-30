@@ -1,16 +1,8 @@
 document.addEventListener("DOMContentLoaded", async function () {
-  const API_BASE = "http://localhost:3000";
+  const API_BASE = "https://oudi-web-devons-projects-8b9164ea.vercel.app";
   const currentUserId = localStorage.getItem("uid");
   const feedContainer = document.querySelector(".feed-container");
 
-    // find uid from localStorage
-  const uid = localStorage.getItem('uid');
-  if (!uid) {
-    console.warn('No uid in localStorage — redirecting to login.');
-    window.location.href = 'login.html';
-  } else {
-    loadUserProfile(uid);
-  }
 
   document.addEventListener("click", () => {
     document.querySelectorAll(".shopping-popup.show").forEach(p => p.classList.remove("show"));
@@ -123,13 +115,21 @@ document.addEventListener("DOMContentLoaded", async function () {
         : "Location unknown";
 
     let shoppingList = [];
-    if (Array.isArray(data.shoppingLinks)) {
-      shoppingList = data.shoppingLinks.filter((l) => typeof l === "string" && l.trim());
-    } else if (typeof data.shoppingLinks === "string" && data.shoppingLinks.trim()) {
-      shoppingList = [data.shoppingLinks.trim()];
+    if (Array.isArray(data.shoppingLink)) {
+     shoppingList = data.shoppingLink.filter((l) => typeof l === "string" && l.trim());
+    } else if (typeof data.shoppingLink === "string" && data.shoppingLink.trim()) {
+     shoppingList = [data.shoppingLink.trim()];
     }
-    shoppingList = shoppingList.filter((l) => l !== "null" && l !== null);
-
+    shoppingList = shoppingList
+      .filter((l) => l !== "null" && l !== null)
+      .map(l => {
+        // Check if the link already starts with http:// or https://
+        if (l.startsWith("http://") || l.startsWith("https://")) {
+          return l; // Link is already good
+        }
+        // If it's a link to an external site but is missing the scheme, add https://
+        return "https://" + l;
+      });
     post.innerHTML = `
       <div class="post-header">
         <img src="${liveAvatar}" class="post-profile" alt="pfp">

@@ -6,6 +6,7 @@
   <title>OUDI</title>
   <link rel="stylesheet" href="/css/profile.css" />
   <script src="/framework/navbar.js" type="module"></script>
+  <script src="/framework/auth.js"></script>
 </head>
 <body>
 <header class="profile-header">
@@ -53,11 +54,8 @@
 
   <section class="pins-section">
     <h3 class="section-title">PINS</h3>
-    <div class="pins-grid">
-      <div class="pin-item"></div>
-      <div class="pin-item"></div>
-      <div class="pin-item"></div>
-    </div>
+      <div class="pins-grid" id="pinsGrid">
+      </div>
   </section>
 
   <section class="diary-section">
@@ -80,7 +78,7 @@
         <div class="diary-day"></div>
         <div class="diary-day"></div>
       </div>
-      <button class="view-diary-btn" onclick="window.location.href='calendar.html'">VIEW MY DIARY</button>
+      <button class="view-diary-btn" onclick="window.location.href='diary.html'">VIEW MY DIARY</button>
     </div>
   </section>
 </main>

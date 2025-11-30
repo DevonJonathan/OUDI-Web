@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const API_BASE = "http://localhost:3000";
+const API_BASE = "https://oudi-web-devons-projects-8b9164ea.vercel.app";
 
   const stateUpload = document.getElementById("state-upload");
   const stateEditor = document.getElementById("state-editor");
@@ -36,20 +36,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const themeDropdown = document.getElementById("themeDropdown");
 
   let selectedFile = null;
-  let shopLinks = [];
+  let shopLink = [];
   let tempLinks = [];
   let locationState = { enabled: true, text: "" };
   let themeValue = "";
 
   const uid = localStorage.getItem("uid");
-
-      // find uid from localStorage
-    if (!uid) {
-      console.warn('No uid in localStorage — redirecting to login.');
-      window.location.href = 'login.html';
-    } else {
-      loadUserProfile(uid);
-    }
 
   const THEME_SUGGESTIONS = [
     "Retro", "Hip Hop", "Minimalist", "Floral", "Y2K",
@@ -141,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   linksBtn.onclick = () => {
     if (!selectedFile) return alert("Upload an image first.");
-    tempLinks = [...shopLinks];
+    tempLinks = [...shopLink];
     renderLinks();
     showModal(linksModal);
   };
@@ -166,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   linksDone.onclick = () => {
-    shopLinks = [...tempLinks];
+    shopLink = [...tempLinks];
     hideModal(linksModal);
   };
 
@@ -250,7 +242,7 @@ document.addEventListener("click", (e) => {
       caption,
       theme,
       location: locationState.enabled ? locationState.text : null,
-      shoppingLinks: shopLinks
+      shoppingLink: shopLink
     };
 
     try {

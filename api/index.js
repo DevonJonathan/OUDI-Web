@@ -1,13 +1,43 @@
 const express = require("express");
 const cors = require("cors");
-const admin = require("./firebaseadmin");
+const admin = require("../firebaseadmin");
 const { v4: uuidv4 } = require("uuid");
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:5500', 'http://127.0.0.1:5500', 'https://oudi-8baa4.web.app'],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  optionsSuccessStatus: 200
+}));
+
 app.use(express.json({ limit: "15mb" }));
 app.use(express.urlencoded({ limit: "15mb", extended: true }));
+
+app.get("/test", (req, res) => {
+  res.json({ 
+    success: true, 
+    message: "Server is working",
+    firebaseInitialized: admin.apps.length > 0,
+    env: {
+      hasProjectId: !!process.env.FIREBASE_PROJECT_ID,
+      hasClientEmail: !!process.env.FIREBASE_CLIENT_EMAIL,
+      hasPrivateKey: !!process.env.FIREBASE_PRIVATE_KEY,
+      hasBucket: !!process.env.FIREBASE_STORAGE_BUCKET
+    }
+  });
+});
+
+app.get("/test-firestore", async (req, res) => {
+  try {
+    const testRef = await admin.firestore().collection("posts").limit(1).get();
+    res.json({ success: true, works: true, count: testRef.size });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message, stack: err.stack });
+  }
+});
 
 function parseBase64Image(base64String) {
   if (!base64String || typeof base64String !== "string") {
@@ -120,7 +150,7 @@ app.post("/posts", async (req, res) => {
       caption,
       theme,
       location,
-      shoppingLinks,
+      shoppingLink,
       imageBase64,
       userId,
       username,
@@ -141,10 +171,10 @@ app.post("/posts", async (req, res) => {
       caption: caption || "",
       theme: theme || "",
       location: location || "",
-      shoppingLinks: Array.isArray(shoppingLinks)
-        ? shoppingLinks
-        : shoppingLinks
-        ? [shoppingLinks]
+      shoppingLink: Array.isArray(shoppingLink)
+        ? shoppingLink
+        : shoppingLink
+        ? [shoppingLink]
         : [],
 
       imageUrl: finalImageUrl,
@@ -157,7 +187,8 @@ app.post("/posts", async (req, res) => {
       likedBy: [],
       likes: 0,
       ratings: {},
-      timestamp: Date.now()
+      timestamp: Date.now(),
+      isPinned: false
     };
 
     const docRef = await admin.firestore().collection("posts").add(postData);
@@ -179,6 +210,94 @@ app.get("/posts", async (req, res) => {
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }
+});
+
+app.get("/posts/user/:uid", async (req, res) => {
+    try {
+        const userId = req.params.uid;
+        const { isPinned, limit, startDate, endDate } = req.query;
+
+        let query = admin.firestore().collection("posts")
+            .where("userId", "==", userId)
+            // Order posts by timestamp descending (most recent first)
+            .orderBy("timestamp", "desc");
+
+        // 1. PINNED FILTER (for profile page PINS section)
+        if (isPinned === 'true') {
+            // Assuming you add an 'isPinned' boolean field to your post documents.
+            query = query.where("isPinned", "==", true);
+        }
+
+        // 2. LIMIT (for profile page MY DIARY RECENTS section)
+        if (limit) {
+            const numLimit = parseInt(limit, 10);
+            if (!isNaN(numLimit) && numLimit > 0) {
+                query = query.limit(numLimit);
+            }
+        }
+        
+        // 3. DATE RANGE FILTER (for diary calendar)
+        if (startDate && endDate) {
+            // Convert YYYY-MM-DD to milliseconds timestamp for Firestore range query
+            const startMs = new Date(startDate).getTime();
+            // End Date needs to be the end of the day, so we add 1 day and subtract 1 ms
+            const endMs = new Date(endDate);
+            endMs.setDate(endMs.getDate() + 1);
+            const endMsAdjusted = endMs.getTime() - 1; 
+
+            query = query
+                .where("timestamp", ">=", startMs)
+                .where("timestamp", "<=", endMsAdjusted);
+        }
+
+        const snap = await query.get();
+        const posts = snap.docs.map(doc => {
+            const data = doc.data();
+            
+            // Calculate average rating
+            const ratings = data.ratings || {};
+            const ratingValues = Object.values(ratings);
+            const avgRating = ratingValues.length > 0 
+                ? (ratingValues.reduce((sum, val) => sum + val, 0) / ratingValues.length).toFixed(1)
+                : null;
+
+            return { 
+                id: doc.id, 
+                ...data, 
+                // Add the averaged rating and total likes directly to the response object
+                rating: avgRating, 
+                likes: data.likedBy ? data.likedBy.length : 0,
+                // Ensure date is included for the calendar logic to work
+                date: data.timestamp 
+            };
+        });
+        
+        res.json({ success: true, posts });
+
+    } catch (err) {
+        console.error(`Error fetching user posts for ${req.params.uid}:`, err);
+        res.status(500).json({ success: false, error: "Failed to retrieve user posts." });
+    }
+});
+
+app.put("/posts/:id/pin", async (req, res) => {
+    try {
+        const postId = req.params.id;
+        const { isPinned } = req.body; // Expects true or false
+
+        if (typeof isPinned !== 'boolean') {
+            return res.status(400).json({ success: false, error: "Missing or invalid 'isPinned' boolean value." });
+        }
+
+        const ref = admin.firestore().collection("posts").doc(postId);
+        await ref.update({ isPinned });
+
+        res.json({ success: true, isPinned });
+
+    } catch (err) {
+        console.error("Pin status update error:", err);
+        res.status(500).json({ success: false, error: err.message });
+    }
 });
 
 app.put("/posts/:id/like", async (req, res) => {
@@ -471,6 +590,49 @@ app.post("/friends/decline", async (req, res) => {
   }
 });
 
+app.delete('/friends/remove', async (req, res) => {
+    try {
+        const { userId, friendId } = req.body;
+        
+        if (!userId || !friendId) {
+            return res.status(400).json({ success: false, error: 'Missing user or friend ID.' });
+        }
+
+        const db = admin.firestore();
+        const batch = db.batch();
+
+        // 1. Find the relationship document from the current user (userId -> friendId)
+        const snap1 = await db.collection("friends")
+            .where("userId", "==", userId)
+            .where("friendId", "==", friendId)
+            .get();
+
+        // 2. Find the reciprocal relationship document (friendId -> userId)
+        const snap2 = await db.collection("friends")
+            .where("userId", "==", friendId)
+            .where("friendId", "==", userId)
+            .get();
+
+        // Check if any documents were found (it should find both if the relationship is mutual)
+        if (snap1.empty && snap2.empty) {
+            return res.status(404).json({ success: false, error: "Friendship documents not found." });
+        }
+        
+        // 3. Add all found documents to the batch for deletion
+        snap1.forEach(doc => batch.delete(doc.ref));
+        snap2.forEach(doc => batch.delete(doc.ref));
+
+        // 4. Commit the deletion batch
+        await batch.commit();
+
+        res.status(200).json({ success: true, message: 'Friendship successfully removed.' });
+        
+    } catch (error) {
+        console.error('Error removing friendship documents:', error);
+        res.status(500).json({ success: false, error: 'Server error during removal.' });
+    }
+});
+
 app.post("/onboarding", async (req, res) => {
   try {
     const { userId, heightCm, weightKg, styles } = req.body;
@@ -500,4 +662,4 @@ app.post("/onboarding", async (req, res) => {
   }
 });
 
-app.listen(3000, () => console.log("Server running on port 3000"));
+module.exports = app;

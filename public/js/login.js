@@ -1,3 +1,5 @@
+const API_BASE = "https://oudi-web-devons-projects-8b9164ea.vercel.app";
+
 const urlParams = new URLSearchParams(window.location.search);
 const skipLoading = urlParams.get('skip_loading') === 'true';
 
@@ -32,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             try {
-                const response = await fetch("http://localhost:3000/login", {
+                const response = await fetch(`${API_BASE}/login`, {                    
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -52,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 localStorage.setItem("uid", data.uid);
 
                 alert("Welcome, " + email);
-                window.location.href = "dashboard.html";
+                window.location.href = "/html/dashboard.html";
 
             } catch (error) {
                 console.error("Error:", error);

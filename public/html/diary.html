@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OUDI</title>
+    <link rel="stylesheet" href="/css/diary.css">
+    <script src="/framework/auth.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <button class="back-btn" id="backBtn">
+                <span class="back-icon">‹</span>
+            </button>
+            <h1 class="title">DIARY</h1>
+        </header>
+
+        <div class="nav-controls">
+            <button class="nav-btn" id="prevBtn">
+                <span class="nav-icon">‹</span>
+            </button>
+            <button class="nav-btn" id="nextBtn">
+                <span class="nav-icon">›</span>
+            </button>
+        </div>
+
+        <div class="calendar-container" id="calendarContainer"></div>
+
+        <div class="posts-display" id="postsDisplay">
+            <div class="posts-header">
+                <h2 class="posts-date" id="postsDate">Select a date</h2>
+            </div>
+            <div class="posts-content" id="postsContent">
+                <p class="no-posts">Click on a date to view posts</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/diary.js"></script>
+</body>
+</html>
